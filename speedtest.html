@@ -15,27 +15,27 @@
 <body>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <div id="app"> 
-        <input v-model="message">
+        <label for="ipport">ip:port</label>
+        <input v-model="message" id="ipport">
         <div id="todo-list-example">
-            <form v-on:submit.prevent="addNewTodo">
-                <label for="new-todo">Add a todo</label>
-                <input v-model="newTodoText" id="new-todo" placeholder="E.g. Feed the cat">
+            <form v-on:submit.prevent="addNewIpport">
+                <label for="new-ipport">Add a ip:port</label>
+                <input v-model="newTodoText" id="new-ipport" placeholder="192.168.50.1:8443">
                 <button>Add</button>
             </form>
             <ul>
-                <li is="todo-item" v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.text" v-on:remove="todos.splice(index,1)"></li>
+                <li is="ipport-item" v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.text" v-on:remove="todos.splice(index,1)"></li>
             </ul>
         </div>
     </div>
     <script>
-        Vue.component('todo-item', {
+        Vue.component('ipport-item', {
             template: '\
                 <li>\
-                    {{ title }}\
-                    <button v-on:click="$emit(\'remove\')">Remove</button>\
+                    {{ testResult }}\
                 </li>\
             ',
-            props: ['title']
+            props: ['testResult']
         })
         var app = new Vue({
             el: '#app',
@@ -69,6 +69,10 @@
         button {
             background: black;
             color: white
+        }
+        label {
+            background: black;
+            color: white;
         }
     </style>
 </body>
