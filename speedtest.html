@@ -14,18 +14,8 @@
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <div id="app">
-        <p><span>{{ message }}</span></p>        
+    <div id="app"> 
         <input v-model="message">
-        <button v-on:click="reverseMessage">Reverse above Message</button>
-        <p><span v-bind:title="info">Hover your mouse over me for a few seconds to see my dynamically bound
-                title!</span></p>
-        <p><span v-if="seen">Now you see me</span></p>
-        <ol>
-            <li v-for="todo in todos">
-                {{ todo.text }}
-            </li>
-        </ol>
         <div id="todo-list-example">
             <form v-on:submit.prevent="addNewTodo">
                 <label for="new-todo">Add a todo</label>
@@ -36,9 +26,6 @@
                 <li is="todo-item" v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.text" v-on:remove="todos.splice(index,1)"></li>
             </ul>
         </div>
-    </div>
-    <div id="app2">
-        <p><span>{{ message }}</span></p>
     </div>
     <script>
         Vue.component('todo-item', {
@@ -75,12 +62,6 @@
                 reverseMessage: function () {
                     this.message = this.message.split(' ').reverse().join(' ')
                 }
-            }
-        })
-        var app2 = new Vue({
-            el: '#app2',
-            data: {
-                message: 'Hello from second Vue instance'
             }
         })
     </script>
