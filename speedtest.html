@@ -10,7 +10,7 @@
 -->
 
 <head>
-
+  <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -23,6 +23,8 @@
   </script>
   <div id="app">
     <h1 :class="titleClass">{{message}}</h1>
+    <label for="cidr">CIDR</label>
+    <input type="text" id="cidr" v-model="cidr">
     <button type="button" @:click="increament">Counter is: {{count}}</button>
     <button type="button" @:click="getPerf">Test Speed</button>
   </div>
@@ -35,7 +37,8 @@
         return {
           message: 'Hello World',
           titleClass: 'title',
-          count: 0
+          count: 0,
+          cidr: '172.64.0.0/13'
         }
       },
       methods: {
@@ -43,8 +46,11 @@
           this.count++
         },
         getPerf() {
+          const cidr = this.cidr.split('/')
+          const {subnet, mask} = {subnet: cidr[0], mask: cidr[1]}
+          console.log(subnet, mask)
           for (let i = 0; i < this.count; i++) {
-            getPerf(ipv4.random('172.67.129.0', 24))
+            getPerf(ipv4.random(subnet, mask))
           }
         }
       }

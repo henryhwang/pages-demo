@@ -24,7 +24,7 @@ let ipv4 = {
 
 async function getPerf(ip) {
   try {
-    const respsone = await fetch('https://' + ip + ':8443', {
+    const respsone = await fetch('https://' + ip + ':8443' + '/Annotation 2019-06-19 163156.png', {
       signal: AbortSignal.timeout(2000)
     })
     if (respsone) {
