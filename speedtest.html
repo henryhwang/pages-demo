@@ -8,71 +8,61 @@
         Handling User Input
         Composing with Components -- TODO
 -->
+
 <head>
 
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <div id="app"> 
-        <label for="ipport">ip:port</label>
-        <input v-model="message" id="ipport">
-        <div id="todo-list-example">
-            <form v-on:submit.prevent="addNewIpport">
-                <label for="new-ipport">Add a ip:port</label>
-                <input v-model="newTodoText" id="new-ipport" placeholder="192.168.50.1:8443">
-                <button>Add</button>
-            </form>
-            <ul>
-                <li is="ipport-item" v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.text" v-on:remove="todos.splice(index,1)"></li>
-            </ul>
-        </div>
-    </div>
-    <script>
-        Vue.component('ipport-item', {
-            template: '\
-                <li>\
-                    {{ testResult }}\
-                </li>\
-            ',
-            props: ['testResult']
-        })
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello Vue!',
-                info: 'created at ' + new Date().toLocaleString(),
-                seen: true,
-                todos: [
-                    { id: 1, text: 'Learn JavaScript' },
-                    { id: 2, text: 'Learn Vue' },
-                    { id: 3, text: 'Build something awesome' }
-                ],
-                nextTodoId: 4,
-                newTodoText: ''
-            },
-            methods: {
-                addNewTodo: function () {
-                    this.todos.push({
-                        id: this.nextTodoId++,
-                        text: this.newTodoText
-                    })
-                    this.newTodoText = ''
-                },
-                reverseMessage: function () {
-                    this.message = this.message.split(' ').reverse().join(' ')
-                }
-            }
-        })
-    </script>
-    <style>
-        button {
-            background: black;
-            color: white
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "/vue-3.4.31.esm-browser.js"
+      }
+    }
+  </script>
+  <div id="app">
+    <h1 :class="titleClass">{{message}}</h1>
+    <button type="button" @:click="increament">Counter is: {{count}}</button>
+    <button type="button" @:click="getPerf">Test Speed</button>
+  </div>
+  <script type="module">
+    import {createApp} from 'vue'
+    import {getPerf, ipv4} from './speedtest.js'
+
+    createApp({
+      data() {
+        return {
+          message: 'Hello World',
+          titleClass: 'title',
+          count: 0
         }
-        label {
-            background: black;
-            color: white;
+      },
+      methods: {
+        increament() {
+          this.count++
+        },
+        getPerf() {
+          for (let i = 0; i < this.count; i++) {
+            getPerf(ipv4.random('172.67.129.0', 24))
+          }
         }
-    </style>
+      }
+    }).mount('#app')
+  </script>
+  <style>
+    button {
+      background: black;
+      color: white
+    }
+
+    label {
+      background: black;
+      color: white;
+    }
+
+    .title {
+      color: red
+    }
+  </style>
 </body>
