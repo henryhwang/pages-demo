@@ -17,7 +17,7 @@
   <script type="importmap">
     {
       "imports": {
-        "vue": "/vue-3.4.31.esm-browser.js"
+        "vue": "./js/vue-3.4.31.esm-browser.js"
       }
     }
   </script>
@@ -28,7 +28,7 @@
   </div>
   <script type="module">
     import {createApp} from 'vue'
-    import {getPerf, ipv4} from './speedtest.js'
+    import {getPerf, ipv4} from './js/speedtest.js'
 
     createApp({
       data() {
@@ -50,19 +50,4 @@
       }
     }).mount('#app')
   </script>
-  <style>
-    button {
-      background: black;
-      color: white
-    }
-
-    label {
-      background: black;
-      color: white;
-    }
-
-    .title {
-      color: red
-    }
-  </style>
 </body>
