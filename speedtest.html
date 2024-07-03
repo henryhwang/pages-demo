@@ -48,9 +48,11 @@
         getPerf() {
           const cidr = this.cidr.split('/')
           const {subnet, mask} = {subnet: cidr[0], mask: cidr[1]}
-          console.log(subnet, mask)
-          for (let i = 0; i < this.count; i++) {
-            getPerf(ipv4.random(subnet, mask))
+          if (mask === 32) getPerf(subnet)
+          else {
+            for (let i = 0; i < this.count; i++) {
+              getPerf(ipv4.random(subnet, mask))
+            }
           }
         }
       }
